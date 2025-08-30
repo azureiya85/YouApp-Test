@@ -5,11 +5,80 @@
   --foreground: #171717;
 }
 
-@theme inline {
+@theme {
+  /* Font Setup */
+  --font-heading: "Poppins", "sans-serif";
+  --font-sans: "Inter", "sans-serif"; 
+
+  /* Primary Colors (Deep Blue) */
+  --color-primary-50: oklch(96.5% 0.02 215);
+  --color-primary-100: oklch(92.8% 0.04 215);
+  --color-primary-200: oklch(85.2% 0.08 215);
+  --color-primary-300: oklch(76.4% 0.12 215);
+  --color-primary-400: oklch(66.8% 0.16 215);
+  --color-primary-500: oklch(56.5% 0.18 215);
+  --color-primary-600: oklch(48.2% 0.16 215);
+  --color-primary-700: oklch(40.1% 0.14 215);
+  --color-primary-800: oklch(32.5% 0.11 215);
+  --color-primary-900: oklch(25.2% 0.08 215);
+
+  /* Secondary Colors (Deep Cyan for buttons) */
+  --color-secondary-50: oklch(95.8% 0.02 195);
+  --color-secondary-100: oklch(91.2% 0.04 195);
+  --color-secondary-200: oklch(82.6% 0.08 195);
+  --color-secondary-300: oklch(73.1% 0.12 195);
+  --color-secondary-400: oklch(62.9% 0.16 195);
+  --color-secondary-500: oklch(52.8% 0.18 195);
+  --color-secondary-600: oklch(44.5% 0.16 195);
+  --color-secondary-700: oklch(36.8% 0.14 195);
+  --color-secondary-800: oklch(29.7% 0.11 195);
+  --color-secondary-900: oklch(23.1% 0.08 195);
+
+  /* tertiary Colors (Soft Gold) - Unchanged */
+  --color-tertiary-50: oklch(97.2% 0.02 85);
+  --color-tertiary-100: oklch(94.1% 0.04 85);
+  --color-tertiary-200: oklch(87.8% 0.08 85);
+  --color-tertiary-300: oklch(80.5% 0.12 85);
+  --color-tertiary-400: oklch(72.3% 0.16 85);
+  --color-tertiary-500: oklch(63.8% 0.18 85);
+  --color-tertiary-600: oklch(56.2% 0.16 85);
+  --color-tertiary-700: oklch(48.9% 0.14 85);
+  --color-tertiary-800: oklch(41.8% 0.11 85);
+  --color-tertiary-900: oklch(35.2% 0.08 85);
+
+  /* Neutral Colors (with a subtle blue tint for cohesion) */
+  --color-neutral-50: oklch(98.2% 0.005 215);
+  --color-neutral-100: oklch(95.8% 0.01 215);
+  --color-neutral-200: oklch(90.2% 0.015 215);
+  --color-neutral-300: oklch(82.6% 0.02 215);
+  --color-neutral-400: oklch(72.8% 0.02 215);
+  --color-neutral-500: oklch(62.1% 0.02 215);
+  --color-neutral-600: oklch(51.8% 0.015 215);
+  --color-neutral-700: oklch(41.2% 0.01 215);
+  --color-neutral-800: oklch(30.8% 0.008 215);
+  --color-neutral-900: oklch(20.5% 0.005 215);
+
+  /* Shadcn UI Variables */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--background);
+  --color-card-foreground: var(--foreground);
+  --color-popover: var(--background);
+  --color-popover-foreground: var(--foreground);
+  --color-primary: var(--color-primary-600);
+  --color-primary-foreground: var(--color-primary-50);
+  --color-secondary: var(--color-secondary-600);
+  --color-secondary-foreground: var(--color-secondary-50);
+  --color-muted: var(--color-neutral-100);
+  --color-muted-foreground: var(--color-neutral-600);
+  --color-tertiary: var(--color-tertiary-600);
+  --color-tertiary-foreground: var(--color-tertiary-50);
+  --color-destructive: oklch(63.25% 0.22 22.18);
+  --color-destructive-foreground: var(--color-neutral-50);
+  --color-border: var(--color-neutral-200);
+  --color-input: var(--color-neutral-200);
+  --color-ring: var(--color-primary-400);
+  --radius: 0.75rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +91,20 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* Custom gradient utilities for the app */
+.bg-gradient-primary {
+  background: linear-gradient(to bottom, var(--color-primary-500), var(--color-primary-800));
+}
+
+.bg-gradient-secondary {
+  background: linear-gradient(to bottom, var(--color-secondary-500), var(--color-secondary-800));
 }
