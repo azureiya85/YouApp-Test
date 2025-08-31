@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "@/components/ui/sonner"; 
+import { Toaster } from "@/components/ui/sonner";
+import { SessionProvider } from "@/context/SessionProvider";
+import { getSession } from "@/lib/authUtils";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -15,20 +17,24 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Auth App",
-  description: "Mobile Web App with Next.js 15",
+  title: "YouApp Test",
+  description: "A mock chatting web app",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getSession();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${poppins.variable}`}>
-        {children}
-        <Toaster position="top-center" richColors /> 
+        <SessionProvider value={{ user: session?.user ?? null }}>
+          {children}
+        </SessionProvider> 
+        <Toaster position="top-center" richColors />
       </body>
     </html>
   );

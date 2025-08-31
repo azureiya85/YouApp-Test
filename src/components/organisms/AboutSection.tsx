@@ -52,8 +52,6 @@ const EnhancedCalendar = ({
   const [currentDate, setCurrentDate] = useState(selected || new Date());
   const currentYear = currentDate.getFullYear();
   const currentMonth = currentDate.getMonth();
-
-  // Generate year options (from 1924 to current year)
   const yearOptions = [];
   const startYear = 1924;
   const endYear = new Date().getFullYear();
@@ -90,26 +88,30 @@ const EnhancedCalendar = ({
   };
 
   return (
-    <div className="p-3 bg-white rounded-lg">
+    <div className="p-4 bg-primary-800 rounded-lg border border-primary-600">
       {/* Year and Month Selection Header */}
       <div className="flex items-center justify-between mb-4 gap-2">
         <Button 
           variant="outline" 
           size="sm" 
           onClick={() => navigateMonth('prev')}
-          className="h-8 w-8 p-0"
+          className="h-8 w-8 p-0 bg-primary-700 border-primary-600 text-white hover:bg-primary-600 hover:border-primary-500"
         >
           <ChevronLeft className="h-4 w-4" />
         </Button>
         
         <div className="flex gap-2">
           <Select value={currentMonth.toString()} onValueChange={handleMonthChange}>
-            <SelectTrigger className="w-32 h-8 text-sm">
+            <SelectTrigger className="w-32 h-8 text-sm bg-primary-700 border-primary-600 text-white">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-primary-800 border-primary-600">
               {months.map((month, index) => (
-                <SelectItem key={index} value={index.toString()}>
+                <SelectItem 
+                  key={index} 
+                  value={index.toString()}
+                  className="text-white hover:bg-primary-700 focus:bg-primary-700"
+                >
                   {month}
                 </SelectItem>
               ))}
@@ -117,12 +119,16 @@ const EnhancedCalendar = ({
           </Select>
           
           <Select value={currentYear.toString()} onValueChange={handleYearChange}>
-            <SelectTrigger className="w-20 h-8 text-sm">
+            <SelectTrigger className="w-20 h-8 text-sm bg-primary-700 border-primary-600 text-white">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent className="max-h-48">
+            <SelectContent className="max-h-48 bg-primary-800 border-primary-600">
               {yearOptions.map((year) => (
-                <SelectItem key={year} value={year.toString()}>
+                <SelectItem 
+                  key={year} 
+                  value={year.toString()}
+                  className="text-white hover:bg-primary-700 focus:bg-primary-700"
+                >
                   {year}
                 </SelectItem>
               ))}
@@ -134,7 +140,7 @@ const EnhancedCalendar = ({
           variant="outline" 
           size="sm" 
           onClick={() => navigateMonth('next')}
-          className="h-8 w-8 p-0"
+          className="h-8 w-8 p-0 bg-primary-700 border-primary-600 text-white hover:bg-primary-600 hover:border-primary-500"
         >
           <ChevronRight className="h-4 w-4" />
         </Button>
@@ -148,7 +154,7 @@ const EnhancedCalendar = ({
         month={currentDate}
         onMonthChange={setCurrentDate}
         disabled={disabled}
-        className="rounded-md border-0"
+        className="rounded-md border-0 text-white w-full [&_.rdp-months]:flex [&_.rdp-month]:m-0 [&_.rdp-table]:w-full [&_.rdp-table]:max-w-none [&_.rdp-head_row]:flex [&_.rdp-row]:flex [&_.rdp-head_cell]:text-neutral-500 [&_.rdp-head_cell]:text-sm [&_.rdp-head_cell]:font-normal [&_.rdp-head_cell]:text-center [&_.rdp-head_cell]:w-10 [&_.rdp-head_cell]:h-10 [&_.rdp-head_cell]:p-0 [&_.rdp-head_cell]:flex [&_.rdp-head_cell]:items-center [&_.rdp-head_cell]:justify-center [&_.rdp-cell]:w-10 [&_.rdp-cell]:h-10 [&_.rdp-cell]:text-center [&_.rdp-cell]:relative [&_.rdp-cell]:p-0 [&_.rdp-button]:w-10 [&_.rdp-button]:h-10 [&_.rdp-button]:bg-transparent [&_.rdp-button]:border-none [&_.rdp-button]:text-white [&_.rdp-button]:text-sm [&_.rdp-button]:cursor-pointer [&_.rdp-button]:rounded-md [&_.rdp-button]:flex [&_.rdp-button]:items-center [&_.rdp-button]:justify-center [&_.rdp-button]:transition-all [&_.rdp-button]:duration-200 [&_.rdp-button:hover]:bg-primary-700 [&_.rdp-button:focus]:outline [&_.rdp-button:focus]:outline-tertiary-500 [&_.rdp-button:focus]:outline-offset-2 [&_.rdp-day_today_.rdp-button]:bg-primary-600 [&_.rdp-day_today_.rdp-button]:text-white [&_.rdp-day_today_.rdp-button]:font-semibold [&_.rdp-day_selected_.rdp-button]:bg-tertiary-500 [&_.rdp-day_selected_.rdp-button]:text-tertiary-50 [&_.rdp-day_selected_.rdp-button]:font-semibold [&_.rdp-day_selected_.rdp-button:hover]:bg-tertiary-600 [&_.rdp-day_outside]:text-neutral-600 [&_.rdp-day_outside_.rdp-button]:text-neutral-600 [&_.rdp-day_disabled_.rdp-button]:text-neutral-700 [&_.rdp-day_disabled_.rdp-button]:cursor-not-allowed [&_.rdp-day_disabled_.rdp-button:hover]:bg-transparent [&_.rdp-day_hidden]:invisible"
       />
     </div>
   );
@@ -178,7 +184,6 @@ export default function AboutSection({ profile }: AboutSectionProps) {
       if (result.success) {
         toast.success("Profile Saved!", { description: "Your information has been updated." });
         setIsEditing(false);
-        // Force a page reload to ensure header updates
         window.location.reload();
       } else {
         toast.error("Save Failed", { description: result.error || "An unknown error occurred." });

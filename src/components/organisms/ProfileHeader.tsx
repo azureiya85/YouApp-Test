@@ -21,7 +21,6 @@ export default function ProfileHeader({ profile }: ProfileHeaderProps) {
 
   return (
     <div className="relative w-full h-[25vh] bg-gradient-to-br from-neutral-700 to-neutral-900 rounded-xl overflow-hidden">
-      {/* Background Image - replace with actual user image if available */}
       <Image
         src="/placeholder-bg.jpg" // Placeholder background image
         alt="Profile background"

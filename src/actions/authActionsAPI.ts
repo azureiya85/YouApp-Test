@@ -148,7 +148,7 @@ export async function loginUser(data: LoginDTO): Promise<ActionResponse> {
   }
 }
 
-// Optional: Add logout function
+// Logout
 export async function logoutUser(): Promise<ActionResponse> {
   try {
     (await cookies()).delete('token');
